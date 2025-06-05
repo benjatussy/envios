@@ -21,7 +21,7 @@ public class Envios {
 
     private String Direccion_Envio;
     private String Estado_Envio;
-    private Date  Fecha_Envio;
-    private Date  Fecha_Entrega;
+    private Date Fecha_Envio;
+    private Date Fecha_Entrega;
 
 }
