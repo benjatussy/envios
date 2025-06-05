@@ -68,6 +68,13 @@ public class EnvioService {
         return toDTO(envioRepository.save(existente));
     }
 
+    public EnviosDTO actualizarEstado(Integer id, String nuevoEstado) {
+        Envios envio = envioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Envío no encontrado"));
+        envio.setEstado_Envio(nuevoEstado);
+        return toDTO(envioRepository.save(envio));
+    }
+
     public void eliminar(Integer id) {
         envioRepository.deleteById(id);
     }
