@@ -1,4 +1,4 @@
-package com.api_envios.envios;
+package com.api_envios;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
