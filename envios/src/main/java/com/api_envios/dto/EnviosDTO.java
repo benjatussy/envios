@@ -1,13 +1,13 @@
 package com.api_envios.dto;
 
+import org.springframework.hateoas.RepresentationModel;
 import lombok.*;
-
 import java.util.Date;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EnviosDTO {
+public class EnviosDTO extends RepresentationModel<EnviosDTO> {
 
     private Integer idEnvio;
     private Integer idVenta;
