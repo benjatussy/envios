@@ -48,6 +48,14 @@ public class EnvioController {
         return ResponseEntity.ok(actualizado);
     }
 
+        @DeleteMapping("/{id}")
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
+        envioService.eliminar(id);
+        return ResponseEntity.noContent().build();
+    }
+
+
+
     // Método HATEOAS para obtener un envío con enlaces
      @GetMapping("/hateoas/{id}")
     public EnviosDTO obtenerHATEOAS(@PathVariable Integer id) {

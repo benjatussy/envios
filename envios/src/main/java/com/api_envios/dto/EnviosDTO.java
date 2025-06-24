@@ -9,7 +9,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class EnviosDTO extends RepresentationModel<EnviosDTO> {
 
-    private Integer idEnvio;
+    private Integer id;//id envio
     private Integer idVenta;
     private String direccionEnvio;
     private String estadoEnvio;
