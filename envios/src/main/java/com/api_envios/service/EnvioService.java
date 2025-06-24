@@ -29,7 +29,7 @@ public class EnvioService {
 
     private Envios toEntity(EnviosDTO dto) {
         Envios envio = new Envios();
-        envio.setIdEnvio(dto.getIdEnvio());
+        envio.setIdEnvio(dto.getId());
         envio.setIdVenta(dto.getIdVenta());
         envio.setDireccion_Envio(dto.getDireccionEnvio());
         envio.setEstado_Envio(dto.getEstadoEnvio());
