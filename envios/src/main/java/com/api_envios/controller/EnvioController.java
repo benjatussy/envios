@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo; 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+import org.springframework.hateoas.Link;
 
 import java.util.List;
 
@@ -56,29 +55,42 @@ public class EnvioController {
 
 
 
-    // Método HATEOAS para obtener un envío con enlaces
-     @GetMapping("/hateoas/{id}")
+
+    @GetMapping("/hateoas/{id}")
     public EnviosDTO obtenerHATEOAS(@PathVariable Integer id) {
         EnviosDTO dto = envioService.obtenerPorId(id);
-        
+        if (dto == null) {
+            return null;
+        }
+
         dto.add(linkTo(methodOn(EnvioController.class).obtenerHATEOAS(id)).withSelfRel());
         dto.add(linkTo(methodOn(EnvioController.class).obtenerTodosHATEOAS()).withRel("todos"));
         dto.add(linkTo(methodOn(EnvioController.class).eliminar(id)).withRel("eliminar"));
 
+        
+        dto.add(Link.of("http://localhost:8091/api/proxy/envios/" + dto.getId()).withSelfRel());
+        dto.add(Link.of("http://localhost:8091/api/proxy/envios/" + dto.getId()).withRel("Modificar HATEOAS").withType("PUT"));
+        dto.add(Link.of("http://localhost:8091/api/proxy/envios/" + dto.getId()).withRel("Eliminar HATEOAS").withType("DELETE"));
+
         return dto;
     }
 
-    //METODO HATEOAS para listar todos los productos utilizando HATEOAS
     @GetMapping("/hateoas")
     public List<EnviosDTO> obtenerTodosHATEOAS() {
         List<EnviosDTO> lista = envioService.listar();
 
         for (EnviosDTO dto : lista) {
+         
             dto.add(linkTo(methodOn(EnvioController.class).obtenerHATEOAS(dto.getId())).withSelfRel());
+
+          
+            dto.add(Link.of("http://localhost:8091/api/proxy/envios").withRel("Get todos HATEOAS"));
+            dto.add(Link.of("http://localhost:8091/api/proxy/envios/" + dto.getId()).withRel("Crear HATEOAS").withType("POST"));
         }
 
         return lista;
     }
+
 
 
 }
